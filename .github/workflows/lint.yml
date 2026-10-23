@@ -11,8 +11,13 @@ jobs:
     steps:
       - name: Checkout/clone the code
       # This will automatically clone the code  instead of using the (git clone) here, use the (uses: actuion@checkoutv4)    
-        uses: actions/checkout@v7
-        # Thsi will install the linter tool
+        uses: actions/checkout@v4
+      # This will isntall python  
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'  # Specify exact version or range (e.g., '3.x')   
+        # This will install the linter tool
       - name: Install Linter
         run: pip install ruff
         # This will  run the linter
