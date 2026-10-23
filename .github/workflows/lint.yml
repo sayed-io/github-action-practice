@@ -15,10 +15,11 @@ jobs:
         # Thsi will install the linter tool
       - name: Install Linter
         run: pip install ruff
-        # Thsi will  run the linter
-      - name: Check the files for linting
-        run: ruff check .
+        # This will  run the linter
       - name: Fix the code automatically background
         run: ruff check . --fix
+             
       - name: Formate the code automatically
         run : ruff format --check .
+      - name: Check the files for linting
+        run: ruff check .
