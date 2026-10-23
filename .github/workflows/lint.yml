@@ -18,3 +18,7 @@ jobs:
         # Thsi will  run the linter
       - name: Check the files for linting
         run: ruff check .
+      - name: Fix the code automatically background
+        run: ruff check . --fix
+      - name: Formate the code automatically
+        run : ruff format --check .
