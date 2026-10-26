@@ -1,0 +1,70 @@
+name: action
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '*.py'
+      - '**/*.py'
+
+jobs:
+  code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Fix Ruff Issues
+        run: ruff check --select I --fix .
+
+      - name: Fix Python Formatting
+        run: ruff format .
+
+      - name: Run Ruff Check
+        run: ruff check .
+
+      - name: Verify Formatting
+        run: ruff format --check .
+
+  build:
+    needs: code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build the code
+        run: echo "Building the Code"
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test the code
+        run: echo "Testing the Code"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy the code
+        run: echo "Deploying the Code"
