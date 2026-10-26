@@ -30,6 +30,21 @@ jobs:
       - name: Check Ruff Formatting
         run: ruff format --check .
 
+      - name: Fix Ruff Issues
+        run: ruff check --fix .
+  
+      - name: Check Ruff
+        run: ruff check .
+  
+      - name: Fix Formatting
+        run: ruff format .
+  
+      - name: Verify Formatting
+        run: ruff format --check .
+    
+
+        
+
   build:
     needs: code
     runs-on: ubuntu-latest
