@@ -1,3 +1,4 @@
+```yaml
 name: action
 
 on:
@@ -12,6 +13,7 @@ on:
 jobs:
   code:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,34 +25,23 @@ jobs:
 
       - name: Install Ruff
         run: pip install ruff
-      
-      - name: Fix Import Sorting
+
+      - name: Fix Ruff Issues
         run: ruff check --select I --fix .
+
+      - name: Fix Python Formatting
+        run: ruff format .
 
       - name: Run Ruff Check
         run: ruff check .
 
-      - name: Check Ruff Formatting
-        run: ruff format --check .
-
-      - name: Fix Ruff Issues
-        run: ruff check --fix .
-  
-      - name: Check Ruff
-        run: ruff check .
-  
-      - name: Fix Formatting
-        run: ruff format .
-  
       - name: Verify Formatting
         run: ruff format --check .
-    
-
-        
 
   build:
     needs: code
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -61,6 +52,7 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -69,11 +61,13 @@ jobs:
         run: echo "Testing the Code"
 
   deploy:
-    needs: [build, test]
+    needs: test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Deploy the code
         run: echo "Deploying the Code"
+```
