@@ -1,10 +1,7 @@
 name: Puush
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+  workflow_dispatch: 
 
 jobs:
   docker:
