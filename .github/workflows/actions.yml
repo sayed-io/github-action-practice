@@ -16,29 +16,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Clone the code
-        run: echo "Cloning the Code"
-      
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.14'
-      
-      - name: install Ruff
+
+      - name: Install Ruff
         run: pip install ruff
 
       - name: Run Ruff Check
-        uses: chartboost/ruff-action@v1
-        with:
-          args: check .
+        run: ruff check .
 
       - name: Check Ruff Formatting
-        uses: chartboost/ruff-action@v1
-        with:
-          args: format --check .
+        run: ruff format --check .
 
   build:
     needs: code
